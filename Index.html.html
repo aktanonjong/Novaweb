@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Nova Web Studio: Futuristic web design and development for your future business.">
+    <title>Nova Web Studio | Futuristic Design</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Bootstrap 5 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-dark: #050505;
+            --accent-cyan: #00f2ff;
+            --accent-purple: #bc13fe;
+            --text-light: #e0e0e0;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+
+        .bg-blur {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .blur-circle {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.3;
+        }
+
+        .blur1 {
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            top: -100px;
+            right: -100px;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .blur2 {
+            width: 350px;
+            height: 350px;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+            bottom: -100px;
+            left: -100px;
+            animation: float 10s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(50px, 50px); }
+        }
+
+        .main-header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
+            padding: 12px 0;
+        }
+
+        .main-header.scrolled {
+            padding: 8px 0;
+            background: rgba(5, 5, 5, 0.95);
+        }
+
+        .flex-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo h1 {
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            margin: 0;
+            font-weight: 700;
+        }
+
+        .logo span {
+            color: var(--accent-cyan);
+            text-shadow: 0 0 15px var(--accent-cyan);
+        }
+
+        .nav-menu ul {
+            list-style: none;
+            display: flex;
+            gap: 15px;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+        }
+
+        .nav-menu li {
+            margin: 0;
+        }
+
+        .nav-link {
+            color: var(--text-light) !important;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.3s;
+            padding: 6px 12px !important;
+            text-decoration: none;
+        }
+
+        .nav-link:hover {
+            color: var(--accent-cyan) !important;
+        }
+
+        .nav-btn {
+            background: linear-gradient(45deg, var(--accent-cyan), var(--accent-purple));
+            color: white !important;
+            padding: 8px 20px !important;
+            border-radius: 25px;
+            font-weight: 600;
+            box-shadow: 0 0 15px rgba(0, 242, 255, 0.3);
+        }
+
+        .nav-btn:hover {
+            box-shadow: 0 0 25px rgba(0, 242, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 70px;
+            padding-bottom: 40px;
+            text-align: center;
+        }
+
+        .badge-custom {
+            color: var(--accent-cyan);
+            font-size: 10px;
+            letter-spacing: 3px;
+            border: 1px solid var(--accent-cyan);
+            padding: 6px 14px;
+            border-radius: 30px;
+            display: inline-block;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #fff;
+            margin: 16px 0 20px;
+            line-height: 1.1;
+        }
+
+        .hero-description {
+            font-size: 14px;
+            color: #aaa;
+            line-height: 1.7;
+            max-width: 700px;
+            margin: 0 auto 35px;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-glow {
+            background: linear-gradient(45deg, var(--accent-cyan), var(--accent-purple));
+            color: white;
+            padding: 12px 30px;
+            font-size: 13px;
+            border: none;
+            font-weight: 600;
+            transition: all 0.4s;
+            border-radius: 30px;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 0 20px rgba(188, 19, 254, 0.5);
+        }
+
+        .btn-glow:hover {
+            box-shadow: 0 0 35px rgba(188, 19, 254, 0.8);
+            transform: scale(1.05);
+            color: white;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--accent-cyan);
+            border: 2px solid var(--accent-cyan);
+            padding: 12px 30px;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.4s;
+            border-radius: 30px;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 0 15px rgba(0, 242, 255, 0.3);
+        }
+
+        .btn-outline:hover {
+            background: var(--accent-cyan);
+            color: black;
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.6);
+            transform: scale(1.05);
+        }
+
+        .section-padding {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 50px;
+            letter-spacing: 3px;
+            font-weight: 700;
+        }
+
+        .glass-card {
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            background: var(--glass-bg);
+            padding: 35px 25px;
+            border-radius: 18px;
+            border: 1px solid var(--glass-border);
+            transition: all 0.5s ease;
+            height: 100%;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 15px 35px rgba(0, 242, 255, 0.12);
+        }
+
+        .glass-card i {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .glass-card h3 {
+            font-size: 18px;
+            margin-bottom: 12px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .glass-card p {
+            color: #aaa;
+            line-height: 1.6;
+            font-size: 13px;
+        }
+
+        .portfolio-card {
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            background: var(--glass-bg);
+            padding: 16px;
+            border-radius: 18px;
+            border: 1px solid var(--glass-border);
+            transition: all 0.5s ease;
+            height: 100%;
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 15px 35px rgba(0, 242, 255, 0.12);
+        }
+
+        .portfolio-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            transition: 0.5s;
+        }
+
+        .portfolio-card:hover img {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.3);
+        }
+
+        .portfolio-card h3 {
+            font-size: 17px;
+            margin-bottom: 8px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .portfolio-card p {
+            color: #aaa;
+            font-size: 12px;
+            margin-bottom: 16px;
+        }
+
+        .btn-view {
+            background: transparent;
+            color: var(--accent-cyan);
+            border: 1px solid var(--accent-cyan);
+            padding: 8px 18px;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border-radius: 25px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-view:hover {
+            background: var(--accent-cyan);
+            color: #000;
+        }
+
+        .about-section {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .lead {
+            font-size: 14px;
+            line-height: 1.7;
+            color: #aaa;
+        }
+
+        footer {
+            background: #0a0a0a;
+            border-top: 1px solid var(--glass-border);
+            padding: 50px 0 30px;
+        }
+
+        footer h2 {
+            font-size: 26px;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin: 35px 0;
+        }
+
+        .contact-links a {
+            font-size: 1.8rem;
+            color: #ccc;
+            transition: all 0.4s;
+        }
+
+        .contact-links a:hover {
+            color: var(--accent-cyan);
+            text-shadow: 0 0 20px var(--accent-cyan);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            color: #555;
+            font-size: 12px;
+            margin-top: 30px;
+        }
+
+        #back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(45deg, var(--accent-cyan), var(--accent-purple));
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.4rem;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(188, 19, 254, 0.5);
+            opacity: 0;
+            transition: all 0.4s;
+            z-index: 1000;
+        }
+
+        #back-to-top.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        #back-to-top:hover {
+            box-shadow: 0 0 35px rgba(188, 19, 254, 0.8);
+            transform: scale(1.1);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.8rem;
+            color: var(--accent-cyan);
+        }
+
+        @media (max-width: 768px) {
+            .hamburger { display: block; }
+            .nav-menu ul { display: none; }
+            .nav-menu ul.active {
+                position: fixed;
+                top: 60px;
+                right: 0;
+                background: rgba(5, 5, 5, 0.95);
+                backdrop-filter: blur(20px);
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+                padding: 15px 30px;
+                border-bottom-left-radius: 15px;
+                box-shadow: -10px 10px 30px rgba(0, 0, 0, 0.5);
+                z-index: 999;
+                animation: slideInFromRight 0.4s ease-out;
+            }
+            @keyframes slideInFromRight {
+                from { opacity: 0; transform: translateX(100px); }
+                to { opacity: 1; transform: translateX(0); }
+            }
+            .nav-menu ul.active a {
+                font-size: 13px;
+                font-weight: 600;
+                color: var(--text-light);
+                padding: 8px 15px;
+                border-radius: 8px;
+            }
+            .nav-menu ul.active a:hover {
+                color: var(--accent-cyan);
+                background: rgba(0, 242, 255, 0.1);
+            }
+            .hero-title { font-size: 2.5rem; }
+            .section-title { font-size: 1.8rem; }
+            .section-padding { padding: 60px 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Blur -->
+    <div class="bg-blur">
+        <div class="blur-circle blur1"></div>
+        <div class="blur-circle blur2"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="main-header">
+        <div class="container flex-header">
+            <div class="logo">
+                <h1>NOVA<span>STUDIO</span></h1>
+            </div>
+            
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="#" class="nav-link">HOME</a></li>
+                    <li><a href="#services" class="nav-link">SERVICES</a></li>
+                    <li><a href="#portfolio" class="nav-link">WORK</a></li>
+                    <li><a href="#about" class="nav-link">ABOUT</a></li>
+                    <li><a href="#contact" class="nav-link nav-btn">CONTACT</a></li>
+                </ul>
+            </nav>
+
+            <div class="hamburger" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section" data-aos="fade-up">
+        <div class="container text-center">
+            <span class="badge-custom">NEXT-GEN WEB SOLUTION</span>
+            <h2 class="hero-title">Elevate Your Digital Presence</h2>
+            <p class="hero-description">
+                We design and develop websites with cutting-edge technology for your future business.<br>
+                เราออกแบบและพัฒนาเว็บไซต์ด้วยเทคโนโลยีที่ล้ำสมัย เพื่อธุรกิจในอนาคตของคุณ
+            </p>
+            <div class="hero-btns">
+                <a href="#contact" class="btn-glow">START PROJECT</a>
+                <a href="#portfolio" class="btn-outline">VIEW WORKS</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="section-padding" data-aos="fade-up">
+        <div class="container">
+            <h2 class="section-title text-center">OUR EXPERTISE</h2>
+            <div class="row g-4 justify-content-center">
+                <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="glass-card text-center p-5 h-100">
+                        <i class="fas fa-microchip"></i>
+                        <h3>Web Design</h3>
+                        <p>Cutting-edge UI/UX that's user-friendly and uniquely standout.<br>UI/UX ที่ล้ำสมัย ใช้งานง่าย และโดดเด่นไม่ซ้ำใคร</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="glass-card text-center p-5 h-100">
+                        <i class="fas fa-rocket"></i>
+                        <h3>Performance</h3>
+                        <p>Fast, powerful, and scalable for business growth.<br>รวดเร็ว ทรงพลัง รองรับการเติบโตของธุรกิจ</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="glass-card text-center p-5 h-100">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>SEO & Security</h3>
+                        <p>Secure and sustainably ranked in searches.<br>ปลอดภัยและติดอันดับการค้นหาอย่างยั่งยืน</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio -->
+    <section id="portfolio" class="section-padding" data-aos="fade-up">
+        <div class="container">
+            <h2 class="section-title text-center">OUR PORTFOLIO</h2>
+            <div class="row g-4 justify-content-center">
+                <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="glass-card portfolio-card text-center h-100">
+                        <img src="https://cdn.dribbble.com/userupload/15257138/file/original-6cfefddad76a5f9160caa99013cfde0b.png?format=webp&resize=800x600" class="img-fluid rounded mb-4" alt="Cyberpunk Dashboard">
+                        <h3>Cyberpunk Dashboard</h3>
+                        <p>Neon-infused AI platform interface</p>
+                        <a href="#" class="btn-view">View Case →</a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="glass-card portfolio-card text-center h-100">
+                        <img src="https://cdn.dribbble.com/userupload/17349478/file/original-bdb86a204cfed4d6562d4c2745da8363.png?resize=800x600" class="img-fluid rounded mb-4" alt="Futuristic Agency">
+                        <h3>Futuristic Agency Site</h3>
+                        <p>Next-gen landing with 3D elements</p>
+                        <a href="#" class="btn-view">View Case →</a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="glass-card portfolio-card text-center h-100">
+                        <img src="https://miro.medium.com/v2/resize:fit:1400/1*gTJqACC7KwLSsKSxrKIzRw.png" class="img-fluid rounded mb-4" alt="Sci-Fi E-Commerce">
+                        <h3>Sci-Fi E-Commerce</h3>
+                        <p>Immersive shopping experience</p>
+                        <a href="#" class="btn-view">View Case →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="section-padding" data-aos="fade-up">
+        <div class="container" style="max-width: 800px;">
+            <h2 class="section-title text-center">ABOUT US</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <p class="lead text-start">
+                        Nova Web Studio is a forward-thinking web agency specializing in futuristic designs. We combine cutting-edge design with modern technologies like React, Three.js, and AI to deliver high-performance, secure, and visually stunning websites that help your business stand out in the digital future.<br><br>
+                        Nova Web Studio คือสตูดิโอเว็บที่มุ่งเน้นอนาคต เชี่ยวชาญด้านการออกแบบล้ำสมัยและเทคโนโลยีทันสมัย เพื่อยกระดับแบรนด์ของคุณให้โดดเด่นในยุคดิจิทัล
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer / Contact -->
+    <footer id="contact" data-aos="fade-up">
+        <div class="container text-center">
+            <h2>Ready to Build the Future?</h2>
+            <div class="contact-links">
+                <a href="https://line.me/ti/p/~your-line-id" target="_blank"><i class="fab fa-line"></i></a>
+                <a href="mailto:hello@nova.com"><i class="fas fa-envelope"></i></a>
+                <a href="https://www.instagram.com/aktanon_ryu" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://twitter.com/yourhandle" target="_blank"><i class="fab fa-twitter"></i></a>
+            </div>
+            <p class="copyright">&copy; 2026 Nova Web Studio. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" onclick="scrollToTop()">
+        <i class="fas fa-rocket"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // AOS Init
+        AOS.init({ duration: 800, once: true });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.main-header');
+            const backToTop = document.getElementById('back-to-top');
+            
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+            
+            if (window.scrollY > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                const target = document.querySelector(targetId);
+                if (target) {
+                    const headerOffset = 90;
+                    const elementPosition = target.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+
+                    // Close mobile menu
+                    const menu = document.querySelector('.nav-menu ul');
+                    if (menu && menu.classList.contains('active')) {
+                        menu.classList.remove('active');
+                    }
+                }
+            });
+        });
+
+        // Toggle Mobile Menu
+        function toggleMenu() {
+            document.querySelector('.nav-menu ul').classList.toggle('active');
+        }
+
+        // Back to Top
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
